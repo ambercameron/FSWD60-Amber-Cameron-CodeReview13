@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="container">
+    <div class="row justify-content-center">
+        <h1>{{ blog.name }}</h1>
+        <div class="card">
+            <img src={{ blog.image }} class="card-img-top">
+            <div class="card-body">
+                <p>{{ blog.description }}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">{% if blog.date %}{{ blog.date|date('d-m-Y H:i') }}{% endif %}</li>
+                <li class="list-group-item">Capacity: {{ blog.capacity }}</li>
+                <li class="list-group-item">{{ blog.email }}</li>
+                <li class="list-group-item">{{ blog.phone }}</li>
+                <li class="list-group-item">{{ blog.address }}</li>
+                <li class="list-group-item" href="{{ blog.url }}">{{ blog.url}}</li>
+            </ul>
+            <div class="card-body">
+                <a href="{{ path('blog_index') }}" class="btn btn-info card-link">Back to the list</a><br>
+                <br><a href="{{ path('blog_edit', { 'id': blog.id }) }}" class="btn btn-info card-link">Edit</a>
+                {{ form_start(delete_form) }}
+                <br><input type="submit" value="Delete" class="btn btn-info">
+                {{ form_end(delete_form) }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

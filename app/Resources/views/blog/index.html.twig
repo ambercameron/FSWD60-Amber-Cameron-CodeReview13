@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<h1 class="text-center">Current Events</h1>
+<div class="container">
+    <div class="row justify-content-around">
+        <a href="{{ path('blog_new') }}" class="btn btn-info">Create a new event</a>
+    </div>
+    <br>
+    <div class="row justify-content-around">
+        {% for blog in blogs %}
+        <div class="card col-3">
+            <img src="{{ blog.image }}" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title">{{ blog.name }}</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">{% if blog.date %}{{ blog.date|date('d-m-Y H:i') }}{% endif %}</li>
+                <li class="list-group-item">{{ blog.address }}</li>
+            </ul>
+            <div class="card-body">
+                <a href="{{ path('blog_show', { 'id': blog.id }) }}" class="btn btn-info">show</a>
+                <a href="{{ path('blog_edit', { 'id': blog.id }) }}" class="btn btn-info">edit</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
